@@ -1,0 +1,8 @@
+- Open Date
+.col-sm-6:nth-child(1) > font > font
+- Submission or Close Date
+.col-sm-6:nth-child(19) > font > font
+- Objective
+p:nth-child(6) > font > font
+- All links related to the tender 
+.field--name-field-icone-link > div
