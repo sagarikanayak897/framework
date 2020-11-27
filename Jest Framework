@@ -1,0 +1,59 @@
+import * as React from 'react';
+import * as Adapter from 'enzyme-adapter-react-15';
+import * as Sinon from 'sinon';
+import { assert, expect } from 'chai';
+import SampleWeb, { ISampleWebState } from
+'https://prefeitura.pbh.gov.br/saude/licitacao/pregao-eletronico-151-2020';
+import { ISampleWebProps } from
+'https://prefeitura.pbh.gov.br/saude/licitacao/pregao-eletronico-151-2020';
+
+configure({ adapter: new Adapter() });
+
+describe('<SampleWeb />', () => {
+  const descTxt = "TestingThisOneOut";
+  let componentDidMountSpy: Sinon.SinonSpy;
+  let renderedElement: ReactWrapper<ISampleWebProps, ISampleWebState>;
+
+  beforeEach(() => {
+    componentDidMountSpy = Sinon.spy(SampleWeb.prototype, 'componentDidMount');
+    renderedElement = mount(<SampleWeb description={descTxt} />);
+  });
+
+  afterEach(() => {
+    renderedElement.unmount();
+    componentDidMountSpy.restore();
+  });
+
+  // Test for checking if it is working
+  it('Should do something', () => {
+    assert.ok(true);
+  });
+
+  it('<SampleWeb /> should render something', () => {
+    expect(renderedElement.find('p')).to.be.exist;
+  });
+
+  it('<SampleWeb /> should render the description', () => {
+    expect(renderedElement.find('p.OpenDate').text()).to.be.equals(descTxt);
+  });
+
+  it('<SampleWeb /> should render an ul', () => {
+    expect(renderedElement.find('SubmissionCloseDate')).to.be.exist;
+  });
+
+  it('<SampleWeb /> should render an ul', () => {
+    expect(renderedElement.find('Objective')).to.be.exist;
+  });
+
+  it('<SampleWeb /> should render an ul', () => {
+    expect(renderedElement.find('links')).to.be.exist;
+  });
+
+  it('<SampleWeb /> state results should not be null', () => {
+    expect(renderedElement.state('results')).to.not.be.null;
+  });
+
+    expect(renderedElement.update().state('results')).to.not.be.null;
+    expect(renderedElement.update().find('ul li').length).to.be.equal(10);
+  });
+});
